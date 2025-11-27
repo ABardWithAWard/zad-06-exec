@@ -14,7 +14,7 @@ public class ExecServiceTest {
     @Test
     void testExecute() {
         MyExecService s = MyExecService.newInstance();
-        TestRunnable r = new TestRunnable();
+        TestRunnableNew r = new TestRunnableNew();
         s.execute(r);
         doSleep(10);
         assertTrue(r.wasRun);
@@ -23,7 +23,7 @@ public class ExecServiceTest {
     @Test
     void testScheduleRunnable() {
         MyExecService s = MyExecService.newInstance();
-        TestRunnable r = new TestRunnable();
+        TestRunnableNew r = new TestRunnableNew();
         s.submit(r);
         doSleep(10);
         assertTrue(r.wasRun);
@@ -32,7 +32,7 @@ public class ExecServiceTest {
     @Test
     void testScheduleRunnableWithResult() throws Exception {
         MyExecService s = MyExecService.newInstance();
-        TestRunnable r = new TestRunnable();
+        TestRunnableNew r = new TestRunnableNew();
         Object expected = new Object();
         Future<Object> f = s.submit(r, expected);
         doSleep(10);
@@ -54,12 +54,12 @@ public class ExecServiceTest {
     @Test
     void testShutdown() {
         ExecutorService s = MyExecService.newInstance();
-        s.execute(new TestRunnable());
+        s.execute(new TestRunnableNew());
         doSleep(10);
         s.shutdown();
         assertThrows(
             RejectedExecutionException.class,
-            () -> s.submit(new TestRunnable()));
+            () -> s.submit(new TestRunnableNew()));
     }
 
     static void doSleep(int milis) {
